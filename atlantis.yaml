@@ -1,0 +1,38 @@
+# Atlantis repo config. apply_requirements / workflow are restricted keys and are set
+# server-side in repos.yaml (infra-catalog/atlantis/repos.yaml).
+version: 3
+automerge: false
+parallel_plan: true
+projects:
+  - name: model-switch-e2e-1-phase1-to-3-dev-core
+    dir: infra/envs/dev/core
+    workspace: default
+    branch: /^dev$/   # only pull requests into this environment's branch plan/apply it
+    terraform_distribution: opentofu
+    autoplan:
+      enabled: true
+      when_modified: ["*.tf", "*.tfvars", "*.tfvars.json", ".terraform.lock.hcl"]
+  - name: model-switch-e2e-1-phase1-to-3-qa-core
+    dir: infra/envs/qa/core
+    workspace: default
+    branch: /^qa$/   # only pull requests into this environment's branch plan/apply it
+    terraform_distribution: opentofu
+    autoplan:
+      enabled: true
+      when_modified: ["*.tf", "*.tfvars", "*.tfvars.json", ".terraform.lock.hcl"]
+  - name: model-switch-e2e-1-phase1-to-3-stg-core
+    dir: infra/envs/stg/core
+    workspace: default
+    branch: /^staging$/   # only pull requests into this environment's branch plan/apply it
+    terraform_distribution: opentofu
+    autoplan:
+      enabled: true
+      when_modified: ["*.tf", "*.tfvars", "*.tfvars.json", ".terraform.lock.hcl"]
+  - name: model-switch-e2e-1-phase1-to-3-prod-core
+    dir: infra/envs/prod/core
+    workspace: default
+    branch: /^prod$/   # only pull requests into this environment's branch plan/apply it
+    terraform_distribution: opentofu
+    autoplan:
+      enabled: true
+      when_modified: ["*.tf", "*.tfvars", "*.tfvars.json", ".terraform.lock.hcl"]
