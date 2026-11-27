@@ -1,0 +1,10 @@
+# Accepted risks for golden-path modules. Owned by the platform team; every entry needs a justification and review.
+
+# AWS-0104 (unrestricted egress) in terraform-aws-modules/eks node groups: worker nodes need outbound access through
+# the NAT gateway to pull container images and reach AWS APIs. Ingress stays private. Reviewed: platform team.
+AWS-0104
+
+# AWS-0053 (internet-facing load balancer) in terraform-aws-modules/alb: the only load balancer the catalog creates
+# is the public HTTPS entry for services the architecture marks public (ECS Fargate target). It has an AWS WAF web
+# ACL (rate limit and managed rules) attached and forwards only to private tasks. Reviewed: platform team.
+AWS-0053
