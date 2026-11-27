@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "project": "model-switch-e2e-1-phase1-to-3",
+  "cloud": "aws",
+  "region": "ap-south-1",
+  "deploy_target": "ecs_fargate",
+  "repository": "priyaXccelera/taskflow-test",
+  "layout_prefix": "infra/",
+  "branching": "env_branches",
+  "release_branch": "main",
+  "environments": {
+    "dev": {
+      "terraform_dir": "infra/envs/dev/core",
+      "branch": "dev",
+      "ecs": {
+        "cluster": "model-switch-e2e-1-phase1-to-3-dev",
+        "image_digests_file": "infra/envs/dev/core/images.auto.tfvars.json"
+      },
+      "secrets": {
+        "membership-api": [
+          {
+            "name": "DATABASE_URL",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/dev/membership-api/DATABASE_URL"
+          },
+          {
+            "name": "PAYMENT_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/dev/membership-api/PAYMENT_PROVIDER_API_KEY"
+          },
+          {
+            "name": "PAYMENT_WEBHOOK_HMAC_SECRET",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/dev/membership-api/PAYMENT_WEBHOOK_HMAC_SECRET"
+          },
+          {
+            "name": "SMS_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/dev/membership-api/SMS_PROVIDER_API_KEY"
+          },
+          {
+            "name": "JWT_SIGNING_SECRET",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/dev/membership-api/JWT_SIGNING_SECRET"
+          }
+        ],
+        "worker": [
+          {
+            "name": "DATABASE_URL",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/dev/worker/DATABASE_URL"
+          },
+          {
+            "name": "PAYMENT_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/dev/worker/PAYMENT_PROVIDER_API_KEY"
+          },
+          {
+            "name": "SMS_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/dev/worker/SMS_PROVIDER_API_KEY"
+          }
+        ]
+      }
+    },
+    "qa": {
+      "terraform_dir": "infra/envs/qa/core",
+      "branch": "qa",
+      "ecs": {
+        "cluster": "model-switch-e2e-1-phase1-to-3-qa",
+        "image_digests_file": "infra/envs/qa/core/images.auto.tfvars.json"
+      },
+      "secrets": {
+        "membership-api": [
+          {
+            "name": "DATABASE_URL",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/qa/membership-api/DATABASE_URL"
+          },
+          {
+            "name": "PAYMENT_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/qa/membership-api/PAYMENT_PROVIDER_API_KEY"
+          },
+          {
+            "name": "PAYMENT_WEBHOOK_HMAC_SECRET",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/qa/membership-api/PAYMENT_WEBHOOK_HMAC_SECRET"
+          },
+          {
+            "name": "SMS_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/qa/membership-api/SMS_PROVIDER_API_KEY"
+          },
+          {
+            "name": "JWT_SIGNING_SECRET",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/qa/membership-api/JWT_SIGNING_SECRET"
+          }
+        ],
+        "worker": [
+          {
+            "name": "DATABASE_URL",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/qa/worker/DATABASE_URL"
+          },
+          {
+            "name": "PAYMENT_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/qa/worker/PAYMENT_PROVIDER_API_KEY"
+          },
+          {
+            "name": "SMS_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/qa/worker/SMS_PROVIDER_API_KEY"
+          }
+        ]
+      }
+    },
+    "stg": {
+      "terraform_dir": "infra/envs/stg/core",
+      "branch": "staging",
+      "ecs": {
+        "cluster": "model-switch-e2e-1-phase1-to-3-stg",
+        "image_digests_file": "infra/envs/stg/core/images.auto.tfvars.json"
+      },
+      "secrets": {
+        "membership-api": [
+          {
+            "name": "DATABASE_URL",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/stg/membership-api/DATABASE_URL"
+          },
+          {
+            "name": "PAYMENT_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/stg/membership-api/PAYMENT_PROVIDER_API_KEY"
+          },
+          {
+            "name": "PAYMENT_WEBHOOK_HMAC_SECRET",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/stg/membership-api/PAYMENT_WEBHOOK_HMAC_SECRET"
+          },
+          {
+            "name": "SMS_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/stg/membership-api/SMS_PROVIDER_API_KEY"
+          },
+          {
+            "name": "JWT_SIGNING_SECRET",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/stg/membership-api/JWT_SIGNING_SECRET"
+          }
+        ],
+        "worker": [
+          {
+            "name": "DATABASE_URL",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/stg/worker/DATABASE_URL"
+          },
+          {
+            "name": "PAYMENT_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/stg/worker/PAYMENT_PROVIDER_API_KEY"
+          },
+          {
+            "name": "SMS_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/stg/worker/SMS_PROVIDER_API_KEY"
+          }
+        ]
+      }
+    },
+    "prod": {
+      "terraform_dir": "infra/envs/prod/core",
+      "branch": "prod",
+      "ecs": {
+        "cluster": "model-switch-e2e-1-phase1-to-3-prod",
+        "image_digests_file": "infra/envs/prod/core/images.auto.tfvars.json"
+      },
+      "secrets": {
+        "membership-api": [
+          {
+            "name": "DATABASE_URL",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/prod/membership-api/DATABASE_URL"
+          },
+          {
+            "name": "PAYMENT_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/prod/membership-api/PAYMENT_PROVIDER_API_KEY"
+          },
+          {
+            "name": "PAYMENT_WEBHOOK_HMAC_SECRET",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/prod/membership-api/PAYMENT_WEBHOOK_HMAC_SECRET"
+          },
+          {
+            "name": "SMS_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/prod/membership-api/SMS_PROVIDER_API_KEY"
+          },
+          {
+            "name": "JWT_SIGNING_SECRET",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/prod/membership-api/JWT_SIGNING_SECRET"
+          }
+        ],
+        "worker": [
+          {
+            "name": "DATABASE_URL",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/prod/worker/DATABASE_URL"
+          },
+          {
+            "name": "PAYMENT_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/prod/worker/PAYMENT_PROVIDER_API_KEY"
+          },
+          {
+            "name": "SMS_PROVIDER_API_KEY",
+            "store": "aws_secrets_manager",
+            "path": "/model-switch-e2e-1-phase1-to-3/prod/worker/SMS_PROVIDER_API_KEY"
+          }
+        ]
+      }
+    }
+  },
+  "images": {
+    "membership-api": {
+      "repository": "ECR_REGISTRY/model-switch-e2e-1-phase1-to-3/membership-api",
+      "source_repo": "priyaXccelera/taskflow-test",
+      "ci_workflow": ".github/workflows/ci-membership-api.yml",
+      "ci_artifact": "image-membership-api",
+      "tag": "<branch>-<commit sha>",
+      "workloads": [
+        "membership-api",
+        "worker"
+      ]
+    }
+  },
+  "workloads": {
+    "membership-api": {
+      "component_id": "ctr-membership-api",
+      "kind": "service",
+      "image": "membership-api",
+      "shares_image": false,
+      "http": true,
+      "public": true,
+      "port": 8080,
+      "health_path": "/healthz",
+      "data_classification": "confidential",
+      "replicas": {
+        "dev": {
+          "min": 1,
+          "max": 2
+        },
+        "qa": {
+          "min": 1,
+          "max": 2
+        },
+        "stg": {
+          "min": 1,
+          "max": 2
+        },
+        "prod": {
+          "min": 2,
+          "max": 4
+        }
+      }
+    },
+    "worker": {
+      "component_id": "ctr-worker",
+      "kind": "worker",
+      "image": "membership-api",
+      "shares_image": true,
+      "http": false,
+      "public": false,
+      "port": 8080,
+      "health_path": "/healthz",
+      "data_classification": "confidential",
+      "replicas": {
+        "dev": {
+          "min": 1,
+          "max": 2
+        },
+        "qa": {
+          "min": 1,
+          "max": 2
+        },
+        "stg": {
+          "min": 1,
+          "max": 2
+        },
+        "prod": {
+          "min": 2,
+          "max": 4
+        }
+      }
+    }
+  },
+  "slos": {},
+  "scope": "Infrastructure and CI only. Deploying images (manifests, promotion, approvals, rollback) is owned by the deployment side."
+}
