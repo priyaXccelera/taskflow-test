@@ -1,0 +1,49 @@
+name: drift-detection
+# Nightly read-only plan. Opens an issue on drift; never applies.
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  id-token: write
+  issues: write
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - env: dev
+            branch: dev
+          - env: qa
+            branch: qa
+          - env: stg
+            branch: staging
+          - env: prod
+            branch: prod
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ matrix.branch }}   # each environment's state lives on its own branch
+      - uses: opentofu/setup-opentofu@v2
+        with:
+          tofu_version: "1.13.2"
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.PLAN_ROLE_ARN }}
+          aws-region: ap-south-1
+      - name: Plan (read-only)
+        id: plan
+        working-directory: infra/envs/${{ matrix.env }}/core
+        run: |
+          tofu init -input=false
+          set +e
+          tofu plan -input=false -lock=false -detailed-exitcode -no-color > plan.txt
+          echo "exitcode=$?" >> "$GITHUB_OUTPUT"
+      - name: Open drift issue
+        if: steps.plan.outputs.exitcode == '2'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "Drift detected in ${{ matrix.env }}" --body "A read-only plan found changes not in Git. Investigate; do not auto-apply." --label drift
